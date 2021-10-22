@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +18,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.projectnewsnicoretno.util.SessionManagerUtil;
+import com.example.projectnewsnicoretno.viewmodel.NewsViewModel;
 
 import java.util.Base64;
 import java.util.concurrent.Executor;
@@ -29,6 +32,7 @@ public class LoginFragment extends Fragment {
     EditText etUserName, etPass;
     ProgressBar progressBar;
     Button btnLogin;
+    NewsViewModel newsViewModel;
     private String username, password;
     private Executor backgroundThread = Executors.newSingleThreadExecutor();
     private Executor mainThread = new Executor() {
@@ -48,6 +52,7 @@ public class LoginFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        newsViewModel = new ViewModelProvider(requireActivity()).get(NewsViewModel.class);
         btnLogin = view.findViewById(R.id.btnLogin);
         etUserName = view.findViewById(R.id.etUserName);
         etPass = view.findViewById(R.id.etPass);
@@ -56,8 +61,15 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 validateLogin();
+                newsViewModel.getNewsTopHeadline().observe(getViewLifecycleOwner(), news -> {
+                    Log.d("TAG", news.toString());
+                });
+                newsViewModel.getNewsFromKeyWord("dogs").observe(getViewLifecycleOwner(), news -> {
+                    Log.d("TAG", news.toString());
+                });
             }
         });
+
     }
 
     private void validateLogin(){
