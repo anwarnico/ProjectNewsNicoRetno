@@ -1,25 +1,29 @@
 package com.example.projectnewsnicoretno;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProvider;
+
+import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.SystemClock;
 import android.util.Log;
-import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.projectnewsnicoretno.util.SessionManagerUtil;
 import com.example.projectnewsnicoretno.viewmodel.NewsViewModel;
@@ -29,13 +33,13 @@ import java.util.Base64;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-public class LoginFragment extends Fragment {
+public class LoginActivity extends AppCompatActivity {
 
     EditText etUserName, etPass;
     ProgressBar progressBar;
+    ConstraintLayout layoutLogin;
     Button btnLogin;
     NewsViewModel newsViewModel;
-    BottomNavigationView bottomNavigationView;
     private String username, password;
     private Executor backgroundThread = Executors.newSingleThreadExecutor();
     private Executor mainThread = new Executor() {
@@ -47,50 +51,37 @@ public class LoginFragment extends Fragment {
     };
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_login, container, false);
-    }
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        newsViewModel = new ViewModelProvider(requireActivity()).get(NewsViewModel.class);
-        btnLogin = view.findViewById(R.id.btnLogin);
-        etUserName = view.findViewById(R.id.etUserName);
-        etPass = view.findViewById(R.id.etPass);
-        progressBar = view.findViewById(R.id.progressBar);
-        bottomNavigationView = getActivity().findViewById(R.id.bottomNavigationView);
-        bottomNavigationView.setVisibility(View.GONE);
+        btnLogin = findViewById(R.id.btnLogin);
+        etUserName = findViewById(R.id.etUserName);
+        etPass = findViewById(R.id.etPass);
+        progressBar = findViewById(R.id.progressBar);
+        layoutLogin = findViewById(R.id.layoutLogin);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 validateLogin();
-                newsViewModel.getNewsTopHeadline().observe(getViewLifecycleOwner(), news -> {
-                    Log.d("TAG", news.toString());
-                });
-                newsViewModel.getNewsFromKeyWord("dogs").observe(getViewLifecycleOwner(), news -> {
-                    Log.d("TAG", news.toString());
-                });
-            }
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(layoutLogin.getWindowToken(), 0);            }
         });
-
     }
 
     private void validateLogin(){
-
         username = etUserName.getText().toString();
         password = etPass.getText().toString();
 
         if (username.isEmpty() || password.isEmpty()) {
-            Toast.makeText(getActivity(), getString(R.string.emptyUserPassAlert), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.emptyUserPassAlert), Toast.LENGTH_SHORT).show();
         }
         else if (username.equalsIgnoreCase("user") && password.equalsIgnoreCase("pass")) {
             login();
         }
         else {
-            Toast.makeText(getActivity(), getString(R.string.wrongUserPassAlert), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.wrongUserPassAlert), Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -109,11 +100,8 @@ public class LoginFragment extends Fragment {
                 mainThread.execute(new Runnable() {
                     @Override
                     public void run() {
-                        progressBar.setVisibility(View.GONE);
-                        btnLogin.setVisibility(View.VISIBLE);
-                        btnLogin.setEnabled(true);
                         startAndStoreSession();
-                        startFragment();
+                        startMainActivity();
                     }
                 });
             }
@@ -135,17 +123,16 @@ public class LoginFragment extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void startAndStoreSession(){
         SessionManagerUtil.getInstance()
-                .storeUserToken(requireActivity(), generateToken(username, password));
+                .storeUserToken(this, generateToken(username, password));
         SessionManagerUtil.getInstance()
-                .startUserSession(requireActivity(), 5);
+                .startUserSession(this, 5);
     }
 
-    private void startFragment() {
-        Fragment home = new HomeFragment();
-        FragmentManager fm = getActivity().getSupportFragmentManager();
-        fm.beginTransaction().add(R.id.container, home).hide(newsViewModel.active).show(home).commit();
-        newsViewModel.active = home;
-        bottomNavigationView.setVisibility(View.VISIBLE);
+    private void startMainActivity() {
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        progressBar.setVisibility(View.GONE);
+        btnLogin.setVisibility(View.VISIBLE);
+        btnLogin.setEnabled(true);
+        startActivity(intent);
     }
-
 }

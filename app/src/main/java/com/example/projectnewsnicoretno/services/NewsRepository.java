@@ -113,11 +113,11 @@ public class NewsRepository {
         });
     }
 
-    public LiveData<List<Articles>> getNewsTopHeadline(String country){
+    public LiveData<List<Articles>> getNewsTopHeadline(String country, String keyWord){
         if (newsTopHeadline.getValue() == null || newsTopHeadline.getValue().getTotalResults() == 0) {
             getTopHeadlineNewsFromNetwork(country);
         }
-        return newsDao.getAll();
+        return newsDao.getArticlesByType(keyWord);
     }
 
     public LiveData<List<Articles>> getNewsFromKeyWord(String keyWord){

@@ -3,6 +3,7 @@ package com.example.projectnewsnicoretno.viewmodel;
 import android.app.Application;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -23,11 +24,12 @@ public class NewsViewModel extends AndroidViewModel {
     private LiveData<List<Articles>> newsPolitics = new MutableLiveData<>();
     private LiveData<List<Articles>> newsArts = new MutableLiveData<>();
     private LiveData<List<Articles>> newsFoods = new MutableLiveData<>();
+    public Fragment active;
 
     public NewsViewModel(@NonNull Application application) {
         super(application);
         newsRepository = new NewsRepository(application);
-        newsTopHeadline = newsRepository.getNewsTopHeadline("us");
+        newsTopHeadline = newsRepository.getNewsTopHeadline("us", "top_headline");
         newsHealths = newsRepository.getNewsFromKeyWord("health");
         newsPolitics = newsRepository.getNewsFromKeyWord("politics");
         newsArts = newsRepository.getNewsFromKeyWord("arts");

@@ -2,11 +2,12 @@ package com.example.projectnewsnicoretno.room.tables;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import com.example.projectnewsnicoretno.model.Source;
 
-@Entity
+@Entity(indices = {@Index(value = {"title"}, unique = true)})
 public class Articles {
 	@PrimaryKey(autoGenerate = true)
 	public int id;
@@ -22,6 +23,7 @@ public class Articles {
 
 	@ColumnInfo(name = "description")
 	public String description;
+
 	@ColumnInfo(name = "title")
 	public String title;
 

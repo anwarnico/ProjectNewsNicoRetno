@@ -22,7 +22,7 @@ public interface NewsDao {
     @Query("SELECT * FROM articles WHERE type IN (:type)")
     LiveData<List<Articles>> getArticlesByType(String type);
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(Articles articles);
 
     @Update
