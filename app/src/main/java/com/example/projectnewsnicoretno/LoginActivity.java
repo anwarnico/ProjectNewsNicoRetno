@@ -30,6 +30,7 @@ import com.example.projectnewsnicoretno.viewmodel.NewsViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Base64;
+import java.util.Observer;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -54,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        newsViewModel = new ViewModelProvider(this).get(NewsViewModel.class);
         btnLogin = findViewById(R.id.btnLogin);
         etUserName = findViewById(R.id.etUserName);
         etPass = findViewById(R.id.etPass);
@@ -65,6 +66,9 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 validateLogin();
+                newsViewModel.getNewsFromKeyWord("health").observe(LoginActivity.this, news -> {
+                    Log.d("TAG", news.toString());
+                });
                 InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(layoutLogin.getWindowToken(), 0);            }
         });

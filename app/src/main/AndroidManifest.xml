@@ -14,8 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjectNewsNicoRetno.NoActionBar">
-        <activity
-            android:name=".LoginActivity">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,7 +22,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"/>
+            android:name=".MainActivity"
+            android:windowSoftInputMode="adjustPan"/>
     </application>
 
 </manifest>
