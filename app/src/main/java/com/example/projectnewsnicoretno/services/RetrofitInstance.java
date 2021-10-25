@@ -9,6 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitInstance {
 
     private NewsEndPointInterface API;
+    private LoginEndPointInterface loginAPI;
 
     public RetrofitInstance(){
         Gson gson = new GsonBuilder()
@@ -20,10 +21,20 @@ public class RetrofitInstance {
                 .build();
         retrofit.create(NewsEndPointInterface.class);
         API = retrofit.create(NewsEndPointInterface.class);
+
+        Retrofit retrofit2 = new Retrofit.Builder()
+                .baseUrl(LoginEndPointInterface.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+        retrofit2.create(LoginEndPointInterface.class);
+        loginAPI = retrofit2.create(LoginEndPointInterface.class);
     }
 
     public NewsEndPointInterface getAPI(){
         return API;
+    }
+    public LoginEndPointInterface getLoginAPI(){
+        return loginAPI;
     }
 
 }
