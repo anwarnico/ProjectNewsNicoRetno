@@ -1,7 +1,6 @@
-package com.example.projectnewsnicoretno;
+package com.example.projectnewsnicoretno.ui;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +12,11 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.projectnewsnicoretno.R;
 import com.example.projectnewsnicoretno.adapter.ArticlesAdapter;
 import com.example.projectnewsnicoretno.viewmodel.NewsViewModel;
 
-import java.util.ArrayList;
-
-public class TopHeadlineFragment extends Fragment {
+public class FoodFragment extends Fragment {
     NewsViewModel newsViewModel;
     private RecyclerView recyclerView;
     private ArticlesAdapter articlesAdapter;
@@ -26,6 +24,7 @@ public class TopHeadlineFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.article_fragment_view, container, false);
     }
 
@@ -34,7 +33,7 @@ public class TopHeadlineFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.recyclerview);
         newsViewModel = new ViewModelProvider(requireActivity()).get(NewsViewModel.class);
-        newsViewModel.getNewsFromKeyWord("top_headline").observe(getViewLifecycleOwner(), news -> {
+        newsViewModel.getNewsFromKeyWord("foods").observe(getViewLifecycleOwner(), news -> {
             articlesAdapter = new ArticlesAdapter(news);
             recyclerView.setAdapter(articlesAdapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

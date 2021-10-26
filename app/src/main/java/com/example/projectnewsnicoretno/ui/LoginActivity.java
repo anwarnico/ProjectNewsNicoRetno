@@ -1,11 +1,8 @@
-package com.example.projectnewsnicoretno;
+package com.example.projectnewsnicoretno.ui;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
@@ -16,21 +13,18 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.SystemClock;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.projectnewsnicoretno.R;
 import com.example.projectnewsnicoretno.util.SessionManagerUtil;
 import com.example.projectnewsnicoretno.viewmodel.NewsViewModel;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Base64;
-import java.util.Observer;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 

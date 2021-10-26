@@ -19,7 +19,7 @@ public interface NewsDao {
     @Query("SELECT * FROM articles")
     LiveData<List<Articles>> getAll();
 
-    @Query("SELECT * FROM articles WHERE type IN (:type)")
+    @Query("SELECT * FROM articles WHERE type IN (:type) ORDER BY publishedAt DESC")
     LiveData<List<Articles>> getArticlesByType(String type);
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

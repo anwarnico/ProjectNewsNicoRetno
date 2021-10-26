@@ -15,6 +15,7 @@ public class RetrofitInstance {
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
                 .create();
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(NewsEndPointInterface.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))

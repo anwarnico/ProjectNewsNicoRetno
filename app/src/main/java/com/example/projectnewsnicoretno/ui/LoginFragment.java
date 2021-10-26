@@ -1,4 +1,4 @@
-package com.example.projectnewsnicoretno;
+package com.example.projectnewsnicoretno.ui;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -21,6 +21,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.projectnewsnicoretno.R;
 import com.example.projectnewsnicoretno.util.SessionManagerUtil;
 import com.example.projectnewsnicoretno.viewmodel.NewsViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;

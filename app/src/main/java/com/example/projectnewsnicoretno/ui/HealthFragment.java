@@ -1,4 +1,4 @@
-package com.example.projectnewsnicoretno;
+package com.example.projectnewsnicoretno.ui;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.projectnewsnicoretno.R;
 import com.example.projectnewsnicoretno.adapter.ArticlesAdapter;
 import com.example.projectnewsnicoretno.viewmodel.NewsViewModel;
 

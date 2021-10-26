@@ -1,12 +1,10 @@
 package com.example.projectnewsnicoretno;
 
 import android.content.Intent;
-import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.projectnewsnicoretno.MainActivity;
+import com.example.projectnewsnicoretno.ui.LoginActivity;
 import com.example.projectnewsnicoretno.util.SessionManagerUtil;
 
 import java.util.Calendar;

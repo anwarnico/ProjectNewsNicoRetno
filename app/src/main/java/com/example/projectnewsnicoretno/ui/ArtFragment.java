@@ -1,4 +1,4 @@
-package com.example.projectnewsnicoretno;
+package com.example.projectnewsnicoretno.ui;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,10 +12,11 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.projectnewsnicoretno.R;
 import com.example.projectnewsnicoretno.adapter.ArticlesAdapter;
 import com.example.projectnewsnicoretno.viewmodel.NewsViewModel;
 
-public class FoodFragment extends Fragment {
+public class ArtFragment extends Fragment {
     NewsViewModel newsViewModel;
     private RecyclerView recyclerView;
     private ArticlesAdapter articlesAdapter;
@@ -32,7 +33,7 @@ public class FoodFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.recyclerview);
         newsViewModel = new ViewModelProvider(requireActivity()).get(NewsViewModel.class);
-        newsViewModel.getNewsFromKeyWord("foods").observe(getViewLifecycleOwner(), news -> {
+        newsViewModel.getNewsFromKeyWord("arts").observe(getViewLifecycleOwner(), news -> {
             articlesAdapter = new ArticlesAdapter(news);
             recyclerView.setAdapter(articlesAdapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
