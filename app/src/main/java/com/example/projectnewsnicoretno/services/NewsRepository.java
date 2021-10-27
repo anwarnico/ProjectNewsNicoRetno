@@ -120,6 +120,10 @@ public class NewsRepository {
         return newsDao.getArticlesByType(keyWord);
     }
 
+    public LiveData<List<Articles>> getAllNews(){
+        return newsDao.getAll();
+    }
+
     public LiveData<List<Articles>> getNewsFromKeyWord(String keyWord){
         if (newsBaseOnKeyword.getValue() == null || newsBaseOnKeyword.getValue().getTotalResults() == 0) {
             getListNewsBaseOnKeywordFromNetwork(keyWord);
@@ -153,5 +157,4 @@ public class NewsRepository {
             }
         });
     }
-
 }

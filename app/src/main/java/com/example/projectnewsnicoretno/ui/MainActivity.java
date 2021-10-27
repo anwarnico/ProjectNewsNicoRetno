@@ -2,11 +2,16 @@ package com.example.projectnewsnicoretno.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
+import android.transition.Fade;
+import android.transition.Slide;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.example.projectnewsnicoretno.R;
@@ -25,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Toolbar toolBar = findViewById(R.id.toolBar);
+        setSupportActionBar(toolBar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
         fm.beginTransaction().replace(R.id.container, home).show(home).commit();
@@ -58,9 +66,26 @@ public class MainActivity extends AppCompatActivity {
             };
 
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        moveTaskToBack(true);
-        finishAffinity();
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.toolbar_menu, menu);
+        return true;
     }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(getSupportFragmentManager().getBackStackEntryCount() > 0){
+            getSupportFragmentManager().popBackStackImmediate();
+        }
+        else{
+            super.onBackPressed();
+            finishAffinity();
+        }
+    }
+
 }

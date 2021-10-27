@@ -16,7 +16,7 @@ import java.util.List;
 
 @Dao
 public interface NewsDao {
-    @Query("SELECT * FROM articles")
+    @Query("SELECT * FROM articles ORDER BY publishedAt DESC")
     LiveData<List<Articles>> getAll();
 
     @Query("SELECT * FROM articles WHERE type IN (:type) ORDER BY publishedAt DESC")

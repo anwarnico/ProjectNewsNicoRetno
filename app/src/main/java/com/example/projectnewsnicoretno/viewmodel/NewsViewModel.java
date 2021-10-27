@@ -24,6 +24,7 @@ public class NewsViewModel extends AndroidViewModel {
     private LiveData<List<Articles>> newsPolitics = new MutableLiveData<>();
     private LiveData<List<Articles>> newsArts = new MutableLiveData<>();
     private LiveData<List<Articles>> newsFoods = new MutableLiveData<>();
+    private LiveData<List<Articles>> allNews = new MutableLiveData<>();
     public Fragment active;
 
     public NewsViewModel(@NonNull Application application) {
@@ -34,10 +35,15 @@ public class NewsViewModel extends AndroidViewModel {
         newsPolitics = newsRepository.getNewsFromKeyWord("politics");
         newsArts = newsRepository.getNewsFromKeyWord("arts");
         newsFoods = newsRepository.getNewsFromKeyWord("foods");
+        allNews = newsRepository.getAllNews();
     }
 
     public LiveData<List<Articles>> getNewsTopHeadline(){
         return newsTopHeadline;
+    }
+
+    public LiveData<List<Articles>> getAllNews(){
+        return allNews;
     }
 
     public LiveData<List<Articles>> getNewsFromKeyWord(String keyWord){
