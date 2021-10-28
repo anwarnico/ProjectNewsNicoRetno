@@ -16,4 +16,5 @@
     <string name="search">Search</string>
     <string name="log_in">Log in</string>
     <string name="search_news">Search News</string>
+    <string name="logout">Logout</string>
 </resources>

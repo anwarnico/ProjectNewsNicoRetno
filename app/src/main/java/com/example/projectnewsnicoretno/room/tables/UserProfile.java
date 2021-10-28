@@ -5,9 +5,9 @@ import androidx.room.Entity;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(indices = {@Index(value = {"title"}, unique = true)})
+@Entity(indices = {@Index(value = {"email"}, unique = true)})
 public class UserProfile {
-    @PrimaryKey(autoGenerate = false)
+    @PrimaryKey(autoGenerate = true)
     public int id;
 
     @ColumnInfo(name = "email")

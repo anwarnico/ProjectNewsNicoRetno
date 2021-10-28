@@ -1,205 +1,204 @@
 package com.example.projectnewsnicoretno.model;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class UserData {
-    @SerializedName("id")
-    @Expose
-    private String id;
-    @SerializedName("email")
-    @Expose
-    private String email;
-    @SerializedName("oauth_uid")
-    @Expose
-    private Object oauthUid;
-    @SerializedName("oauth_provider")
-    @Expose
-    private Object oauthProvider;
-    @SerializedName("username")
-    @Expose
-    private String username;
-    @SerializedName("full_name")
-    @Expose
-    private String fullName;
-    @SerializedName("avatar")
-    @Expose
-    private String avatar;
-    @SerializedName("banned")
-    @Expose
-    private String banned;
-    @SerializedName("last_login")
-    @Expose
-    private String lastLogin;
-    @SerializedName("last_activity")
-    @Expose
-    private String lastActivity;
-    @SerializedName("date_created")
-    @Expose
-    private String dateCreated;
-    @SerializedName("forgot_exp")
-    @Expose
-    private Object forgotExp;
-    @SerializedName("remember_time")
-    @Expose
-    private Object rememberTime;
-    @SerializedName("remember_exp")
-    @Expose
-    private Object rememberExp;
-    @SerializedName("verification_code")
-    @Expose
-    private Object verificationCode;
-    @SerializedName("top_secret")
-    @Expose
-    private Object topSecret;
-    @SerializedName("ip_address")
-    @Expose
-    private String ipAddress;
-    @SerializedName("company_id")
-    @Expose
-    private String companyId;
 
-    public String getId() {
-        return id;
-    }
+	@SerializedName("remember_exp")
+	private String rememberExp;
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	@SerializedName("company_id")
+	private String companyId;
 
-    public String getEmail() {
-        return email;
-    }
+	@SerializedName("last_login")
+	private String lastLogin;
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	@SerializedName("date_created")
+	private String dateCreated;
 
-    public Object getOauthUid() {
-        return oauthUid;
-    }
+	@SerializedName("oauth_uid")
+	private String oauthUid;
 
-    public void setOauthUid(Object oauthUid) {
-        this.oauthUid = oauthUid;
-    }
+	@SerializedName("avatar")
+	private String avatar;
 
-    public Object getOauthProvider() {
-        return oauthProvider;
-    }
+	@SerializedName("ip_address")
+	private String ipAddress;
 
-    public void setOauthProvider(Object oauthProvider) {
-        this.oauthProvider = oauthProvider;
-    }
+	@SerializedName("forgot_exp")
+	private String forgotExp;
 
-    public String getUsername() {
-        return username;
-    }
+	@SerializedName("remember_time")
+	private String rememberTime;
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+	@SerializedName("full_name")
+	private String fullName;
 
-    public String getFullName() {
-        return fullName;
-    }
+	@SerializedName("last_activity")
+	private String lastActivity;
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
+	@SerializedName("top_secret")
+	private String topSecret;
 
-    public String getAvatar() {
-        return avatar;
-    }
+	@SerializedName("oauth_provider")
+	private String oauthProvider;
 
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
+	@SerializedName("id")
+	private String id;
 
-    public String getBanned() {
-        return banned;
-    }
+	@SerializedName("banned")
+	private String banned;
 
-    public void setBanned(String banned) {
-        this.banned = banned;
-    }
+	@SerializedName("verification_code")
+	private String verificationCode;
 
-    public String getLastLogin() {
-        return lastLogin;
-    }
+	@SerializedName("email")
+	private String email;
 
-    public void setLastLogin(String lastLogin) {
-        this.lastLogin = lastLogin;
-    }
+	@SerializedName("username")
+	private String username;
 
-    public String getLastActivity() {
-        return lastActivity;
-    }
+	public String getRememberExp() {
+		return rememberExp;
+	}
 
-    public void setLastActivity(String lastActivity) {
-        this.lastActivity = lastActivity;
-    }
+	public void setRememberExp(String rememberExp) {
+		this.rememberExp = rememberExp;
+	}
 
-    public String getDateCreated() {
-        return dateCreated;
-    }
+	public String getCompanyId() {
+		return companyId;
+	}
 
-    public void setDateCreated(String dateCreated) {
-        this.dateCreated = dateCreated;
-    }
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
+	}
 
-    public Object getForgotExp() {
-        return forgotExp;
-    }
+	public String getLastLogin() {
+		return lastLogin;
+	}
 
-    public void setForgotExp(Object forgotExp) {
-        this.forgotExp = forgotExp;
-    }
+	public void setLastLogin(String lastLogin) {
+		this.lastLogin = lastLogin;
+	}
 
-    public Object getRememberTime() {
-        return rememberTime;
-    }
+	public String getDateCreated() {
+		return dateCreated;
+	}
 
-    public void setRememberTime(Object rememberTime) {
-        this.rememberTime = rememberTime;
-    }
+	public void setDateCreated(String dateCreated) {
+		this.dateCreated = dateCreated;
+	}
 
-    public Object getRememberExp() {
-        return rememberExp;
-    }
+	public String getOauthUid() {
+		return oauthUid;
+	}
 
-    public void setRememberExp(Object rememberExp) {
-        this.rememberExp = rememberExp;
-    }
+	public void setOauthUid(String oauthUid) {
+		this.oauthUid = oauthUid;
+	}
 
-    public Object getVerificationCode() {
-        return verificationCode;
-    }
+	public String getAvatar() {
+		return avatar;
+	}
 
-    public void setVerificationCode(Object verificationCode) {
-        this.verificationCode = verificationCode;
-    }
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
 
-    public Object getTopSecret() {
-        return topSecret;
-    }
+	public String getIpAddress() {
+		return ipAddress;
+	}
 
-    public void setTopSecret(Object topSecret) {
-        this.topSecret = topSecret;
-    }
+	public void setIpAddress(String ipAddress) {
+		this.ipAddress = ipAddress;
+	}
 
-    public String getIpAddress() {
-        return ipAddress;
-    }
+	public String getForgotExp() {
+		return forgotExp;
+	}
 
-    public void setIpAddress(String ipAddress) {
-        this.ipAddress = ipAddress;
-    }
+	public void setForgotExp(String forgotExp) {
+		this.forgotExp = forgotExp;
+	}
 
-    public String getCompanyId() {
-        return companyId;
-    }
+	public String getRememberTime() {
+		return rememberTime;
+	}
 
-    public void setCompanyId(String companyId) {
-        this.companyId = companyId;
-    }
+	public void setRememberTime(String rememberTime) {
+		this.rememberTime = rememberTime;
+	}
+
+	public String getFullName() {
+		return fullName;
+	}
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+
+	public String getLastActivity() {
+		return lastActivity;
+	}
+
+	public void setLastActivity(String lastActivity) {
+		this.lastActivity = lastActivity;
+	}
+
+	public String getTopSecret() {
+		return topSecret;
+	}
+
+	public void setTopSecret(String topSecret) {
+		this.topSecret = topSecret;
+	}
+
+	public String getOauthProvider() {
+		return oauthProvider;
+	}
+
+	public void setOauthProvider(String oauthProvider) {
+		this.oauthProvider = oauthProvider;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getBanned() {
+		return banned;
+	}
+
+	public void setBanned(String banned) {
+		this.banned = banned;
+	}
+
+	public String getVerificationCode() {
+		return verificationCode;
+	}
+
+	public void setVerificationCode(String verificationCode) {
+		this.verificationCode = verificationCode;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
 }

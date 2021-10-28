@@ -30,6 +30,11 @@ public class NewsViewModel extends AndroidViewModel {
     public NewsViewModel(@NonNull Application application) {
         super(application);
         newsRepository = new NewsRepository(application);
+        getAllNeededNews();
+
+    }
+
+    private void getAllNeededNews() {
         newsTopHeadline = newsRepository.getNewsTopHeadline("us", "top_headline");
         newsHealths = newsRepository.getNewsFromKeyWord("health");
         newsPolitics = newsRepository.getNewsFromKeyWord("politics");

@@ -7,9 +7,9 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class SessionManagerUtil {
-    public static final String SESSION_PREFERENCE = "com.example.loginwithsession.SessionManagerUtil.SESSION_PREFERENCE";
-    public static final String SESSION_TOKEN = "com.example.loginwithsession.SessionManagerUtil.SESSION_TOKEN";
-    public static final String SESSION_EXPIRY_TIME = "com.example.loginwithsession.SessionManagerUtil.SESSION_EXPIRY_TIME";
+    public static final String SESSION_PREFERENCE = "com.example.projectnewsnicoretno.SessionManagerUtil.SESSION_PREFERENCE";
+    public static final String SESSION_TOKEN = "com.example.projectnewsnicoretno.SessionManagerUtil.SESSION_TOKEN";
+    public static final String SESSION_EXPIRY_TIME = "com.example.projectnewsnicoretno.SessionManagerUtil.SESSION_EXPIRY_TIME";
 
     private static SessionManagerUtil INSTANCE;
     public static SessionManagerUtil getInstance(){

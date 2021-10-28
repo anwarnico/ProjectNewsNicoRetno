@@ -1,40 +1,50 @@
 package com.example.projectnewsnicoretno.model;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class User {
-    @SerializedName("X-API-Key")
-    @Expose
-    private String XAPIKey;
-    @SerializedName("username")
-    @Expose
-    private String username;
-    @SerializedName("password")
-    @Expose
-    private String password;
+public class User{
 
-    public String getXAPIKey() {
-        return XAPIKey;
-    }
+	@SerializedName("data")
+	private UserData userData;
 
-    public void setXAPIKey(String XAPIKey) {
-        this.XAPIKey = XAPIKey;
-    }
+	@SerializedName("message")
+	private String message;
 
-    public String getUsername() {
-        return username;
-    }
+	@SerializedName("status")
+	private boolean status;
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+	@SerializedName("token")
+	private String token;
 
-    public String getPassword() {
-        return password;
-    }
+	public void setData(UserData userData){
+		this.userData = userData;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public UserData getData(){
+		return userData;
+	}
+
+	public void setMessage(String message){
+		this.message = message;
+	}
+
+	public String getMessage(){
+		return message;
+	}
+
+	public void setStatus(boolean status){
+		this.status = status;
+	}
+
+	public boolean isStatus(){
+		return status;
+	}
+
+	public void setToken(String token){
+		this.token = token;
+	}
+
+	public String getToken(){
+		return token;
+	}
 }

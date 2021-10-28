@@ -4,6 +4,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Context;
 import android.content.Intent;
@@ -21,9 +22,12 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.projectnewsnicoretno.R;
+import com.example.projectnewsnicoretno.adapter.ArticlesAdapter;
 import com.example.projectnewsnicoretno.util.SessionManagerUtil;
 import com.example.projectnewsnicoretno.viewmodel.NewsViewModel;
+import com.example.projectnewsnicoretno.viewmodel.UserViewModel;
 
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -34,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     ProgressBar progressBar;
     ConstraintLayout layoutLogin;
     Button btnLogin;
-    NewsViewModel newsViewModel;
+    UserViewModel userViewModel;
     private String username, password;
     private Executor backgroundThread = Executors.newSingleThreadExecutor();
     private Executor mainThread = new Executor() {
@@ -49,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        newsViewModel = new ViewModelProvider(this).get(NewsViewModel.class);
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         btnLogin = findViewById(R.id.btnLogin);
         etUserName = findViewById(R.id.etUserName);
         etPass = findViewById(R.id.etPass);
@@ -59,10 +63,8 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                invisibleLogin();
                 validateLogin();
-                newsViewModel.getNewsFromKeyWord("health").observe(LoginActivity.this, news -> {
-                    Log.d("TAG", news.toString());
-                });
                 InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(layoutLogin.getWindowToken(), 0);            }
         });
@@ -74,21 +76,36 @@ public class LoginActivity extends AppCompatActivity {
 
         if (username.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, getString(R.string.emptyUserPassAlert), Toast.LENGTH_SHORT).show();
-        }
-        else if (username.equalsIgnoreCase("user") && password.equalsIgnoreCase("pass")) {
-            login();
+            visibleLogin();
         }
         else {
-            Toast.makeText(this, getString(R.string.wrongUserPassAlert), Toast.LENGTH_SHORT).show();
-            return;
+            userViewModel.getUserDetail(username, password).observe(LoginActivity.this, user -> {
+                if (user != null) {
+                    login();
+                }
+                else {
+                    Toast.makeText(this, getString(R.string.wrongUserPassAlert), Toast.LENGTH_SHORT).show();
+                    visibleLogin();
+                }
+            });
         }
 
     }
 
-    private void login() {
+    private void invisibleLogin() {
         progressBar.setVisibility(View.VISIBLE);
         btnLogin.setVisibility(View.INVISIBLE);
         btnLogin.setEnabled(false);
+    }
+
+    private void visibleLogin() {
+        progressBar.setVisibility(View.GONE);
+        btnLogin.setVisibility(View.VISIBLE);
+        btnLogin.setEnabled(true);
+    }
+
+    private void login() {
+
         backgroundThread.execute(new Runnable() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
@@ -128,9 +145,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void startMainActivity() {
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-        progressBar.setVisibility(View.GONE);
-        btnLogin.setVisibility(View.VISIBLE);
-        btnLogin.setEnabled(true);
+        visibleLogin();
         startActivity(intent);
     }
 }
