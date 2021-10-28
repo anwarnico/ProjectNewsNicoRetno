@@ -24,6 +24,10 @@ public class BookmarkRepository {
         return bookmarkDao.getAllBookmark(userEmail);
     }
 
+    public LiveData<Bookmark> getBookmarkByTitle(String title){
+        return bookmarkDao.getBookmarkByTitle(title);
+    }
+
     public void insert(Bookmark bookmark){
         AppDatabase.databaseWriteExecutor.execute(new Runnable() {
             @Override

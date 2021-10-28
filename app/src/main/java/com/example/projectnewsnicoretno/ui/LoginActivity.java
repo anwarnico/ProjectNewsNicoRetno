@@ -67,6 +67,7 @@ public class LoginActivity extends AppCompatActivity {
         layoutLogin = findViewById(R.id.layoutLogin);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
                 validateLogin();
@@ -75,6 +76,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void validateLogin(){
         username = etUserName.getText().toString();
         password = etPass.getText().toString();
@@ -109,22 +111,10 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setEnabled(true);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void login() {
-        backgroundThread.execute(new Runnable() {
-            @RequiresApi(api = Build.VERSION_CODES.O)
-            @Override
-            public void run() {
-                SystemClock.sleep(1500);
-                mainThread.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        startAndStoreSession();
-                        startMainActivity();
-                    }
-                });
-            }
-        });
-
+        startAndStoreSession();
+        startMainActivity();
     }
 
     private String generateToken(String username, String password){

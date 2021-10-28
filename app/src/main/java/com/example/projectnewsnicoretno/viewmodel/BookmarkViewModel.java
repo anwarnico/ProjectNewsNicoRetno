@@ -25,6 +25,10 @@ public class BookmarkViewModel extends AndroidViewModel {
         return bookmarkRepository.getAllBookmark(userEmail);
     }
 
+    public LiveData<Bookmark> getBookmarkByTitle(String title) {
+        return bookmarkRepository.getBookmarkByTitle(title);
+    }
+
     public void insert(Bookmark bookmark) {
         bookmarkRepository.insert(bookmark);
     }

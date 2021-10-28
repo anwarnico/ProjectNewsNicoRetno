@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
@@ -101,7 +102,14 @@ public class DetailNewsFragment extends Fragment {
         btnBookmark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                insertBookmark(articlesData);
+                bookmarkViewModel.getBookmarkByTitle(articlesData.title).observe(getViewLifecycleOwner(), bookmark -> {
+                    if (bookmark == null) {
+                        insertBookmark(articlesData);
+                    }
+                    else {
+                        deleteBookmark(bookmark);
+                    }
+                });
             }
         });
     }
@@ -117,6 +125,10 @@ public class DetailNewsFragment extends Fragment {
         bookmark.urlToImage = articles.urlToImage;
         bookmark.userEmail = email;
         bookmarkViewModel.insert(bookmark);
+    }
+
+    public void deleteBookmark(Bookmark bookmark) {
+        bookmarkViewModel.delete(bookmark);
     }
 
     @Override
