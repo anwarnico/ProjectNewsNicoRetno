@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,6 +22,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.projectnewsnicoretno.BaseActivity;
 import com.example.projectnewsnicoretno.R;
 import com.example.projectnewsnicoretno.adapter.ArticlesAdapter;
 import com.example.projectnewsnicoretno.util.SessionManagerUtil;
@@ -39,6 +41,8 @@ public class LoginActivity extends AppCompatActivity {
     ConstraintLayout layoutLogin;
     Button btnLogin;
     UserViewModel userViewModel;
+    private SharedPreferences sharedPreferences;
+    public static final String SHARED_PREFERENCE_NAME = "com.example.projectnewsnicoretno.ProfileFragment";
     private String username, password;
     private Executor backgroundThread = Executors.newSingleThreadExecutor();
     private Executor mainThread = new Executor() {
@@ -53,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        sharedPreferences = getSharedPreferences(SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE);
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         btnLogin = findViewById(R.id.btnLogin);
         etUserName = findViewById(R.id.etUserName);
@@ -82,6 +87,7 @@ public class LoginActivity extends AppCompatActivity {
             userViewModel.getUserDetail(username, password).observe(LoginActivity.this, user -> {
                 if (user != null) {
                     login();
+                    sharedPreferences.edit().putString("email", user.getData().getEmail()).commit();
                 }
                 else {
                     Toast.makeText(this, getString(R.string.wrongUserPassAlert), Toast.LENGTH_SHORT).show();

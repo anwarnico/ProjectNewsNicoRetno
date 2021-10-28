@@ -39,7 +39,7 @@ public class SessionManagerUtil {
 
     private long getExpiryDateFromPreference(Context context){
         return context.getSharedPreferences(SESSION_PREFERENCE, Context.MODE_PRIVATE)
-                .getLong(SESSION_EXPIRY_TIME, 0);
+                .getLong(SESSION_EXPIRY_TIME, 10);
     }
 
     public void storeUserToken(Context context, String token){

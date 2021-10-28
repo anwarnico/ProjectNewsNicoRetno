@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 //import com.example.projectnewsnicoretno.model.UserData;
@@ -12,9 +13,11 @@ import com.example.projectnewsnicoretno.model.User;
 import com.example.projectnewsnicoretno.model.UserData;
 import com.example.projectnewsnicoretno.room.AppDatabase;
 import com.example.projectnewsnicoretno.room.UserDao;
+import com.example.projectnewsnicoretno.room.tables.Articles;
 import com.example.projectnewsnicoretno.room.tables.UserProfile;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -74,6 +77,10 @@ public class UserRepository {
                 }
             }
         });
+    }
+
+    public LiveData<UserProfile> getUserByEmail(String email){
+        return userDao.getUserByEmail(email);
     }
 
     public MutableLiveData<User> getUserDetail(String username, String password){

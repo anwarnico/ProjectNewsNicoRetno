@@ -1,6 +1,7 @@
 package com.example.projectnewsnicoretno;
 
 import android.content.Intent;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,6 +21,8 @@ public class BaseActivity extends AppCompatActivity {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }
+        Log.d("TAG isAllowed : ", String.valueOf(isAllowed));
         super.onResume();
+
     }
 }

@@ -17,8 +17,8 @@ public interface UserDao {
     @Query("SELECT * FROM UserProfile")
     LiveData<List<UserProfile>> getAll();
 
-    @Query("SELECT * FROM UserProfile WHERE username IN (:username)")
-    LiveData<UserProfile> getUserByUsername(String username);
+    @Query("SELECT * FROM UserProfile WHERE email = :email")
+    LiveData<UserProfile> getUserByEmail(String email);
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(UserProfile userProfile);

@@ -14,11 +14,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.example.projectnewsnicoretno.BaseActivity;
 import com.example.projectnewsnicoretno.R;
 import com.example.projectnewsnicoretno.viewmodel.NewsViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
     BottomNavigationView bottomNavigationView;
     final FragmentManager fm = getSupportFragmentManager();
     Fragment home = new HomeFragment();
