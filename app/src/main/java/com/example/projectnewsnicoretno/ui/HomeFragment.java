@@ -43,9 +43,7 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         newsViewModel = new ViewModelProvider(requireActivity()).get(NewsViewModel.class);
-        newsViewModel.getNewsFromKeyWord("health").observe(getViewLifecycleOwner(), news -> {
-            Log.d("TAG", news.toString());
-        });
+        newsViewModel.getAllNeededNews();
         searchView = view.findViewById(R.id.searchView);
         searchView.setOnClickListener(new View.OnClickListener() {
             @Override
