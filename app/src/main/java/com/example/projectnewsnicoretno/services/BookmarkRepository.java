@@ -8,6 +8,8 @@ import com.example.projectnewsnicoretno.room.AppDatabase;
 import com.example.projectnewsnicoretno.room.BookmarkDao;
 import com.example.projectnewsnicoretno.room.tables.Bookmark;
 
+import java.util.List;
+
 public class BookmarkRepository {
     private BookmarkDao bookmarkDao;
     private NewsEndPointInterface API;
@@ -18,7 +20,7 @@ public class BookmarkRepository {
         bookmarkDao = database.bookmarkDao();
     }
 
-    public LiveData<Bookmark> getAllBookmark(String userEmail){
+    public LiveData<List<Bookmark>> getAllBookmark(String userEmail){
         return bookmarkDao.getAllBookmark(userEmail);
     }
 

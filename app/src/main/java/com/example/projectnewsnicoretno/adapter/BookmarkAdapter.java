@@ -8,36 +8,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.projectnewsnicoretno.R;
-import com.example.projectnewsnicoretno.model.ArticlesItem;
 import com.example.projectnewsnicoretno.room.tables.Articles;
+import com.example.projectnewsnicoretno.room.tables.Bookmark;
 import com.example.projectnewsnicoretno.ui.DetailNewsFragment;
 import com.example.projectnewsnicoretno.ui.MainActivity;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
-public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.ViewHolder> {
-    private List<Articles> articleList;
+public class BookmarkAdapter extends RecyclerView.Adapter<BookmarkAdapter.ViewHolder> {
+    private List<Bookmark> bookmarkList;
     Context context;
     private SharedPreferences sharedPreferences;
     public static final String SHARED_PREFERENCE_NAME = "com.example.projectnewsnicoretno.sharedpref";
 
-    public ArticlesAdapter(List<Articles> articleList){
-        this.articleList = articleList;
+    public BookmarkAdapter(List<Bookmark> bookmarkList){
+        this.bookmarkList = bookmarkList;
     }
 
     @NonNull
@@ -54,20 +48,20 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.ViewHo
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Articles articles = articleList.get(position);
-        LocalDateTime localDateTime = LocalDateTime.parse(articles.publishedAt, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'"));
+        Bookmark bookmark = bookmarkList.get(position);
+        LocalDateTime localDateTime = LocalDateTime.parse(bookmark.publishedAt, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'"));
         String formattedDate = localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        holder.tvTitle.setText(articles.title);
+        holder.tvTitle.setText(bookmark.title);
         holder.tvPublishedAt.setText(formattedDate);
         Glide.with(context)
-                .load(articles.urlToImage)
+                .load(bookmark.urlToImage)
                 .circleCrop()
                 .into(holder.newsImage);
     }
 
     @Override
     public int getItemCount() {
-        return articleList.size();
+        return bookmarkList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -87,10 +81,10 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.ViewHo
         public void onClick(View v) {
             int position = getAbsoluteAdapterPosition(); // gets item position
             if (position != RecyclerView.NO_POSITION) { // Check if an item was deleted, but the user clicked it before the UI removed it
-                Articles articles = articleList.get(position);
+                Bookmark bookmark = bookmarkList.get(position);
                 ((MainActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.container, new DetailNewsFragment(), "DetailNewsFragment")
                         .addToBackStack("DetailNewsFragment").commit();
-                sharedPreferences.edit().putString("title", articles.title).apply();
+                sharedPreferences.edit().putString("title", bookmark.title).apply();
             }
         }
     }

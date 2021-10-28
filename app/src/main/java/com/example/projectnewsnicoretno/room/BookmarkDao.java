@@ -16,7 +16,7 @@ import java.util.List;
 @Dao
 public interface BookmarkDao {
     @Query("SELECT * FROM bookmark WHERE userEmail = :userEmail")
-    LiveData<Bookmark> getAllBookmark(String userEmail);
+    LiveData<List<Bookmark>> getAllBookmark(String userEmail);
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(Bookmark bookmark);

@@ -9,7 +9,7 @@ import androidx.lifecycle.LiveData;
 import com.example.projectnewsnicoretno.room.tables.Bookmark;
 import com.example.projectnewsnicoretno.services.BookmarkRepository;
 
-;
+;import java.util.List;
 
 public class BookmarkViewModel extends AndroidViewModel {
 
@@ -21,7 +21,7 @@ public class BookmarkViewModel extends AndroidViewModel {
         bookmarkRepository = new BookmarkRepository(application);
     }
 
-    public LiveData<Bookmark> getAllBookmark(String userEmail) {
+    public LiveData<List<Bookmark>> getAllBookmark(String userEmail) {
         return bookmarkRepository.getAllBookmark(userEmail);
     }
 

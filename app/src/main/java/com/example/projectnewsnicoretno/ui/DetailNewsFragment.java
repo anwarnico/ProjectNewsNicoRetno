@@ -63,7 +63,7 @@ public class DetailNewsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        String title = sharedPreferences.getString("article", "NoArticle");
+        String title = sharedPreferences.getString("title", "NoArticle");
         email = sharedPreferences.getString("email", "defaultEmail");
         bottomNavigationView = getActivity().findViewById(R.id.bottomNavigationView);
         toolBar = getActivity().findViewById(R.id.toolBar);
