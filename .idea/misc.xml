@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/ProjectNewsNicoRetno/app/src/main/res/drawable-v24/custom_black_radius.xml" value="0.3828125" />
+        <entry key="..\:/ProjectNewsNicoRetno/app/src/main/res/drawable-v24/custom_white_radius.xml" value="0.3828125" />
+        <entry key="..\:/ProjectNewsNicoRetno/app/src/main/res/drawable/custom_whiteradius.xml" value="0.3828125" />
         <entry key="..\:/ProjectNewsNicoRetno/app/src/main/res/drawable/selector.xml" value="0.22135416666666666" />
         <entry key="..\:/ProjectNewsNicoRetno/app/src/main/res/layout/activity_login.xml" value="0.19114583333333332" />
         <entry key="..\:/ProjectNewsNicoRetno/app/src/main/res/layout/activity_main.xml" value="0.28940217391304346" />
