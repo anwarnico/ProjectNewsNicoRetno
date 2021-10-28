@@ -28,7 +28,6 @@ import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 
 public class HomeFragment extends Fragment {
     BottomNavigationView bottomNavigationView;
-    NewsViewModel newsViewModel;
     ConstraintLayout searchView;
     MainActivity mainActivity;
     Toolbar toolBar;
@@ -42,8 +41,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        newsViewModel = new ViewModelProvider(requireActivity()).get(NewsViewModel.class);
-        newsViewModel.getAllNeededNews();
         searchView = view.findViewById(R.id.searchView);
         searchView.setOnClickListener(new View.OnClickListener() {
             @Override
