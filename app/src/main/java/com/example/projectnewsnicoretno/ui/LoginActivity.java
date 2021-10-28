@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.example.projectnewsnicoretno.BaseActivity;
 import com.example.projectnewsnicoretno.R;
 import com.example.projectnewsnicoretno.adapter.ArticlesAdapter;
+import com.example.projectnewsnicoretno.model.User;
 import com.example.projectnewsnicoretno.util.SessionManagerUtil;
 import com.example.projectnewsnicoretno.viewmodel.NewsViewModel;
 import com.example.projectnewsnicoretno.viewmodel.UserViewModel;
@@ -68,7 +69,6 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                invisibleLogin();
                 validateLogin();
                 InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(layoutLogin.getWindowToken(), 0);            }
@@ -81,13 +81,14 @@ public class LoginActivity extends AppCompatActivity {
 
         if (username.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, getString(R.string.emptyUserPassAlert), Toast.LENGTH_SHORT).show();
-            visibleLogin();
         }
         else {
+            invisibleLogin();
             userViewModel.getUserDetail(username, password).observe(LoginActivity.this, user -> {
-                if (user != null) {
+                User getUser = user;
+                if (getUser != null) {
                     login();
-                    sharedPreferences.edit().putString("email", user.getData().getEmail()).commit();
+                    sharedPreferences.edit().putString("email", user.getData().getEmail()).apply();
                 }
                 else {
                     Toast.makeText(this, getString(R.string.wrongUserPassAlert), Toast.LENGTH_SHORT).show();
@@ -151,7 +152,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void startMainActivity() {
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-        visibleLogin();
         startActivity(intent);
+        visibleLogin();
     }
 }

@@ -63,6 +63,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 SessionManagerUtil.getInstance().endUserSession(getContext());
+                sharedPreferences.edit().clear().apply();
                 Intent intent = new Intent(getContext(), LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
