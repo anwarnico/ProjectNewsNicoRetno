@@ -8,15 +8,17 @@ import androidx.room.RoomDatabase;
 
 import com.example.projectnewsnicoretno.model.News;
 import com.example.projectnewsnicoretno.room.tables.Articles;
+import com.example.projectnewsnicoretno.room.tables.Bookmark;
 import com.example.projectnewsnicoretno.room.tables.UserProfile;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Articles.class, UserProfile.class}, version = 1, exportSchema = false)
+@Database(entities = {Articles.class, UserProfile.class, Bookmark.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract NewsDao newsDao();
     public abstract UserDao userDao();
+    public abstract BookmarkDao bookmarkDao();
 
     private static volatile AppDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;

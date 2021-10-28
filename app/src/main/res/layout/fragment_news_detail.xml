@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".ui.HomeFragment">
+
+    <ImageView
+        android:id="@+id/ivNews"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/custom_black_radius"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/news" />
+
+    <TextView
+        android:id="@+id/tvPublishedAt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:textSize="18sp"
+        android:text="@string/published_at"
+        android:textColor="@color/black"
+        android:padding="16dp"
+        android:gravity="center"
+        android:background="@drawable/custom_white_radius"
+        app:layout_constraintEnd_toStartOf="@+id/btnBookmark"
+        app:layout_constraintStart_toStartOf="@+id/ivNews"
+        app:layout_constraintTop_toBottomOf="@+id/ivNews" />
+
+    <ImageButton
+        android:id="@+id/btnBookmark"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:scaleType="fitCenter"
+        android:tint="@color/white"
+        android:background="@android:color/transparent"
+        android:src="@drawable/bookmarks_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/tvPublishedAt"
+        app:layout_constraintEnd_toEndOf="@+id/ivNews"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tvPublishedAt"
+        app:layout_constraintTop_toTopOf="@+id/tvPublishedAt" />
+
+    <TextView
+        android:id="@+id/tvContent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="TextView"
+        android:textColor="@color/black"
+        android:background="@drawable/custom_white_radius"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/btnBookmark"
+        app:layout_constraintStart_toStartOf="@+id/tvPublishedAt"
+        app:layout_constraintTop_toBottomOf="@+id/tvPublishedAt" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

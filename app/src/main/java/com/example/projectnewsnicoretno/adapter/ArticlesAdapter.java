@@ -1,6 +1,7 @@
 package com.example.projectnewsnicoretno.adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,8 @@ import com.bumptech.glide.Glide;
 import com.example.projectnewsnicoretno.R;
 import com.example.projectnewsnicoretno.model.ArticlesItem;
 import com.example.projectnewsnicoretno.room.tables.Articles;
+import com.example.projectnewsnicoretno.ui.DetailNewsFragment;
+import com.example.projectnewsnicoretno.ui.MainActivity;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -30,6 +33,8 @@ import java.util.Locale;
 public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.ViewHolder> {
     private List<Articles> articleList;
     Context context;
+    private SharedPreferences sharedPreferences;
+    public static final String SHARED_PREFERENCE_NAME = "com.example.projectnewsnicoretno.sharedpref";
 
     public ArticlesAdapter(List<Articles> articleList){
         this.articleList = articleList;
@@ -39,6 +44,7 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context = parent.getContext();
+        sharedPreferences = context.getSharedPreferences(SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE);
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.recyclerview_article_items, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
@@ -82,7 +88,9 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.ViewHo
             int position = getAbsoluteAdapterPosition(); // gets item position
             if (position != RecyclerView.NO_POSITION) { // Check if an item was deleted, but the user clicked it before the UI removed it
                 Articles articles = articleList.get(position);
-                Toast.makeText(v.getContext(), tvTitle.getText(), Toast.LENGTH_SHORT).show();
+                ((MainActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.container, new DetailNewsFragment(), "DetailNewsFragment")
+                        .addToBackStack("DetailNewsFragment").commit();
+                sharedPreferences.edit().putString("article", articles.title).apply();
             }
         }
     }

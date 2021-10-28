@@ -9,6 +9,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.projectnewsnicoretno.room.tables.Articles;
+import com.example.projectnewsnicoretno.room.tables.Bookmark;
 import com.example.projectnewsnicoretno.services.NewsRepository;
 import com.example.projectnewsnicoretno.model.News;
 
@@ -31,7 +32,6 @@ public class NewsViewModel extends AndroidViewModel {
         super(application);
         newsRepository = new NewsRepository(application);
         getAllNeededNews();
-
     }
 
     public void getAllNeededNews() {
@@ -40,7 +40,10 @@ public class NewsViewModel extends AndroidViewModel {
         newsPolitics = newsRepository.getNewsFromKeyWord("politics");
         newsArts = newsRepository.getNewsFromKeyWord("arts");
         newsFoods = newsRepository.getNewsFromKeyWord("foods");
-        allNews = newsRepository.getAllNews();
+    }
+
+    public LiveData<Articles> getArticlesByTitle(String title) {
+        return newsRepository.getArticlesByTitle(title);
     }
 
     public LiveData<List<Articles>> getNewsTopHeadline(){
@@ -48,6 +51,7 @@ public class NewsViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<Articles>> getAllNews(){
+        allNews = newsRepository.getAllNews();
         return allNews;
     }
 

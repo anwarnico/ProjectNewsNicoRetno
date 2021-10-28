@@ -17,4 +17,5 @@
     <string name="log_in">Log in</string>
     <string name="search_news">Search News</string>
     <string name="logout">Logout</string>
+    <string name="published_at">Published At</string>
 </resources>

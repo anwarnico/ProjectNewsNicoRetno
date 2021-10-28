@@ -9,8 +9,8 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.projectnewsnicoretno.model.ArticlesItem;
 import com.example.projectnewsnicoretno.room.tables.Articles;
+import com.example.projectnewsnicoretno.room.tables.Bookmark;
 
 import java.util.List;
 
@@ -21,6 +21,9 @@ public interface NewsDao {
 
     @Query("SELECT * FROM articles WHERE type IN (:type) ORDER BY publishedAt DESC")
     LiveData<List<Articles>> getArticlesByType(String type);
+
+    @Query("SELECT * FROM articles WHERE title = :title")
+    LiveData<Articles> getArticlesByTitle(String title);
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(Articles articles);

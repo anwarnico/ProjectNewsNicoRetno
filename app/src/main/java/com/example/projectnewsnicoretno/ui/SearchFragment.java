@@ -54,6 +54,7 @@ public class SearchFragment extends Fragment {
         recyclerViewSearch = view.findViewById(R.id.recyclerViewSearch);
         bottomNavigationView = getActivity().findViewById(R.id.bottomNavigationView);
         toolBar = getActivity().findViewById(R.id.toolBar);
+
         newsViewModel = new ViewModelProvider(requireActivity()).get(NewsViewModel.class);
         newsViewModel.getAllNews().observe(getViewLifecycleOwner(), news -> {
             articlesList = news;
@@ -62,6 +63,13 @@ public class SearchFragment extends Fragment {
             recyclerViewSearch.setAdapter(articlesAdapter);
             recyclerViewSearch.setLayoutManager(new LinearLayoutManager(getActivity()));
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        bottomNavigationView.setVisibility(View.GONE);
+        toolBar.setVisibility(View.VISIBLE);
     }
 
     @Override

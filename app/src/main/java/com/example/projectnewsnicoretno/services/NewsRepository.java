@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.projectnewsnicoretno.BuildConfig;
 import com.example.projectnewsnicoretno.model.News;
 import com.example.projectnewsnicoretno.room.AppDatabase;
+import com.example.projectnewsnicoretno.room.BookmarkDao;
 import com.example.projectnewsnicoretno.room.NewsDao;
 import com.example.projectnewsnicoretno.room.tables.Articles;
 
@@ -21,6 +22,7 @@ import java.util.concurrent.Executors;
 
 public class NewsRepository {
     private NewsDao newsDao;
+    private BookmarkDao bookmarkDao;
     private LiveData<List<Articles>> allArticle;
     private LiveData<List<Articles>> articleFromKeyword;
     private NewsEndPointInterface API;
@@ -124,6 +126,10 @@ public class NewsRepository {
         return newsDao.getAll();
     }
 
+    public LiveData<Articles> getArticlesByTitle(String title){
+        return newsDao.getArticlesByTitle(title);
+    }
+
     public LiveData<List<Articles>> getNewsFromKeyWord(String keyWord){
         if (newsBaseOnKeyword.getValue() == null || newsBaseOnKeyword.getValue().getTotalResults() == 0) {
             getListNewsBaseOnKeywordFromNetwork(keyWord);
@@ -157,4 +163,5 @@ public class NewsRepository {
             }
         });
     }
+
 }

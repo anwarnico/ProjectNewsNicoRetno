@@ -41,16 +41,15 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        bottomNavigationView = getActivity().findViewById(R.id.bottomNavigationView);
+        toolBar = getActivity().findViewById(R.id.toolBar);
+
         searchView = view.findViewById(R.id.searchView);
         searchView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.container, new SearchFragment(), "SearchFragmentTag").addToBackStack("SearchFragmentTag").commit();
-                bottomNavigationView = getActivity().findViewById(R.id.bottomNavigationView);
-                toolBar = getActivity().findViewById(R.id.toolBar);
-                bottomNavigationView.setVisibility(View.GONE);
-                toolBar.setVisibility(View.VISIBLE);
             }
         });
 
@@ -68,5 +67,12 @@ public class HomeFragment extends Fragment {
 
         SmartTabLayout viewPagerTab = (SmartTabLayout) view.findViewById(R.id.tab_layout);
         viewPagerTab.setViewPager(viewPager);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        bottomNavigationView.setVisibility(View.VISIBLE);
+        toolBar.setVisibility(View.GONE);
     }
 }

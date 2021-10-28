@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
     Button btnLogin;
     UserViewModel userViewModel;
     private SharedPreferences sharedPreferences;
-    public static final String SHARED_PREFERENCE_NAME = "com.example.projectnewsnicoretno.ProfileFragment";
+    public static final String SHARED_PREFERENCE_NAME = "com.example.projectnewsnicoretno.sharedpref";
     private String username, password;
     private Executor backgroundThread = Executors.newSingleThreadExecutor();
     private Executor mainThread = new Executor() {
@@ -85,8 +85,7 @@ public class LoginActivity extends AppCompatActivity {
         else {
             invisibleLogin();
             userViewModel.getUserDetail(username, password).observe(LoginActivity.this, user -> {
-                User getUser = user;
-                if (getUser != null) {
+                if (user != null) {
                     login();
                     sharedPreferences.edit().putString("email", user.getData().getEmail()).apply();
                 }
@@ -96,7 +95,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
             });
         }
-
     }
 
     private void invisibleLogin() {
@@ -112,12 +110,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void login() {
-
         backgroundThread.execute(new Runnable() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void run() {
-                // connect server
                 SystemClock.sleep(1500);
                 mainThread.execute(new Runnable() {
                     @Override

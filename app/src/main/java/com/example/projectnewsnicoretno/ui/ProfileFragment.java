@@ -28,7 +28,7 @@ public class ProfileFragment extends Fragment {
     UserViewModel userViewModel;
     Button btnLogout;
     private SharedPreferences sharedPreferences;
-    public static final String SHARED_PREFERENCE_NAME = "com.example.projectnewsnicoretno.ProfileFragment";
+    public static final String SHARED_PREFERENCE_NAME = "com.example.projectnewsnicoretno.sharedpref";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
