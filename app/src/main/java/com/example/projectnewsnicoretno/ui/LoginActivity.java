@@ -26,6 +26,7 @@ import com.example.projectnewsnicoretno.BaseActivity;
 import com.example.projectnewsnicoretno.R;
 import com.example.projectnewsnicoretno.adapter.ArticlesAdapter;
 import com.example.projectnewsnicoretno.model.User;
+import com.example.projectnewsnicoretno.util.LiveDataUtil;
 import com.example.projectnewsnicoretno.util.SessionManagerUtil;
 import com.example.projectnewsnicoretno.viewmodel.NewsViewModel;
 import com.example.projectnewsnicoretno.viewmodel.UserViewModel;
@@ -86,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         else {
             invisibleLogin();
-            userViewModel.getUserDetail(username, password).observe(LoginActivity.this, user -> {
+            LiveDataUtil.observeOnce(userViewModel.getUserDetail(username, password), user -> {
                 if (user != null) {
                     login();
                     sharedPreferences.edit().putString("email", user.getData().getEmail()).apply();

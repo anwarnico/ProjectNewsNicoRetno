@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -23,12 +24,14 @@ import com.bumptech.glide.Glide;
 import com.example.projectnewsnicoretno.R;
 import com.example.projectnewsnicoretno.room.tables.Articles;
 import com.example.projectnewsnicoretno.room.tables.Bookmark;
+import com.example.projectnewsnicoretno.util.LiveDataUtil;
 import com.example.projectnewsnicoretno.viewmodel.BookmarkViewModel;
 import com.example.projectnewsnicoretno.viewmodel.NewsViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 public class DetailNewsFragment extends Fragment {
 
@@ -97,16 +100,26 @@ public class DetailNewsFragment extends Fragment {
                 ivNews.setImageResource(R.drawable.news);
             }
             articlesData = articles;
+            LiveDataUtil.observeOnce(bookmarkViewModel.getBookmarkByTitle(articlesData.title), bookmark -> {
+                if (bookmark == null) {
+                    btnBookmark.setImageResource(R.drawable.bookmarks_icon);
+                }
+                else {
+                    btnBookmark.setImageResource(R.drawable.bookmark_filled);
+                }
+            });
         });
 
         btnBookmark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                bookmarkViewModel.getBookmarkByTitle(articlesData.title).observe(getViewLifecycleOwner(), bookmark -> {
+                LiveDataUtil.observeOnce(bookmarkViewModel.getBookmarkByTitle(articlesData.title), bookmark -> {
                     if (bookmark == null) {
+                        btnBookmark.setImageResource(R.drawable.bookmark_filled);
                         insertBookmark(articlesData);
                     }
                     else {
+                        btnBookmark.setImageResource(R.drawable.bookmarks_icon);
                         deleteBookmark(bookmark);
                     }
                 });
@@ -137,4 +150,5 @@ public class DetailNewsFragment extends Fragment {
         bottomNavigationView.setVisibility(View.VISIBLE);
         toolBar.setVisibility(View.VISIBLE);
     }
+
 }
