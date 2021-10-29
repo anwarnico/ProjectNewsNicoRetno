@@ -2,6 +2,7 @@ package com.example.projectnewsnicoretno.ui;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.transition.AutoTransition;
@@ -39,8 +40,18 @@ public class SearchFragment extends Fragment {
     BottomNavigationView bottomNavigationView;
     NewsViewModel newsViewModel;
     Toolbar toolBar;
+    String query;
     List<Articles> articlesList, searchList;
     private ArticlesAdapter articlesAdapter;
+    private SharedPreferences sharedPreferences;
+    public static final String SHARED_PREFERENCE_NAME = "com.example.projectnewsnicoretno.sharedpref";
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        sharedPreferences = requireActivity().getSharedPreferences(SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -54,6 +65,7 @@ public class SearchFragment extends Fragment {
         recyclerViewSearch = view.findViewById(R.id.recyclerViewSearch);
         bottomNavigationView = getActivity().findViewById(R.id.bottomNavigationView);
         toolBar = getActivity().findViewById(R.id.toolBar);
+        query = sharedPreferences.getString("query", "defaultQuery");
 
         newsViewModel = new ViewModelProvider(requireActivity()).get(NewsViewModel.class);
         newsViewModel.getAllNews().observe(getViewLifecycleOwner(), news -> {
@@ -62,6 +74,9 @@ public class SearchFragment extends Fragment {
             articlesAdapter = new ArticlesAdapter(news);
             recyclerViewSearch.setAdapter(articlesAdapter);
             recyclerViewSearch.setLayoutManager(new LinearLayoutManager(getActivity()));
+            if (!query.equals("defaultQuery")) {
+                filter(query);
+            }
         });
     }
 
@@ -82,11 +97,16 @@ public class SearchFragment extends Fragment {
         sv.setMaxWidth(Integer.MAX_VALUE);
         sv.setQueryHint(getString(R.string.search));
         sv.requestFocus();
+        if (!query.equals("defaultQuery")) {
+            sv.setQuery(query, true);
+        }
         InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
         sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
+                filter(s);
+                sharedPreferences.edit().putString("query", s).apply();
                 imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
                 return true;
             }
@@ -98,6 +118,7 @@ public class SearchFragment extends Fragment {
                 }
                 else {
                     filter(s);
+                    sharedPreferences.edit().putString("query", s).apply();
                 }
                 return false;
             }

@@ -1,6 +1,8 @@
 package com.example.projectnewsnicoretno.ui;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -29,8 +31,15 @@ import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 public class HomeFragment extends Fragment {
     BottomNavigationView bottomNavigationView;
     ConstraintLayout searchView;
-    MainActivity mainActivity;
+    private SharedPreferences sharedPreferences;
+    public static final String SHARED_PREFERENCE_NAME = "com.example.projectnewsnicoretno.sharedpref";
     Toolbar toolBar;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        sharedPreferences = requireActivity().getSharedPreferences(SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,6 +50,10 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        String query = sharedPreferences.getString("query", "defaultQuery");
+        if (query != "defaultQuery") {
+            sharedPreferences.edit().remove("query").apply();
+        }
         bottomNavigationView = getActivity().findViewById(R.id.bottomNavigationView);
         toolBar = getActivity().findViewById(R.id.toolBar);
 
