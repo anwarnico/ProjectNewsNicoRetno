@@ -18,4 +18,7 @@
     <string name="search_news">Search News</string>
     <string name="logout">Logout</string>
     <string name="published_at">Published At</string>
+    <string name="delete_bookmark_text">Do you want to Delete this Bookmark ?</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
 </resources>

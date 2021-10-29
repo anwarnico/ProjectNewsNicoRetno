@@ -90,7 +90,7 @@ public class UserRepository {
         return user;
     }
 
-    void insert(UserProfile userProfile){
+    public void insert(UserProfile userProfile){
         AppDatabase.databaseWriteExecutor.execute(new Runnable() {
             @Override
             public void run() {
@@ -99,7 +99,7 @@ public class UserRepository {
         });
     }
 
-    void update(UserProfile userProfile){
+    public void update(UserProfile userProfile){
         AppDatabase.databaseWriteExecutor.execute(new Runnable() {
             @Override
             public void run() {
@@ -108,7 +108,7 @@ public class UserRepository {
         });
     }
 
-    void delete(UserProfile userProfile){
+    public void delete(UserProfile userProfile){
         AppDatabase.databaseWriteExecutor.execute(new Runnable() {
             @Override
             public void run() {

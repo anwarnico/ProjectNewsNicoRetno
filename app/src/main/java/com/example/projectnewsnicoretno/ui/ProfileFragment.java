@@ -18,6 +18,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.projectnewsnicoretno.R;
+import com.example.projectnewsnicoretno.room.tables.UserProfile;
+import com.example.projectnewsnicoretno.util.LiveDataUtil;
 import com.example.projectnewsnicoretno.util.SessionManagerUtil;
 import com.example.projectnewsnicoretno.viewmodel.UserViewModel;
 
@@ -27,6 +29,7 @@ public class ProfileFragment extends Fragment {
     TextView tvNama, tvEmail;
     UserViewModel userViewModel;
     Button btnLogout;
+    UserProfile userProfile;
     private SharedPreferences sharedPreferences;
     public static final String SHARED_PREFERENCE_NAME = "com.example.projectnewsnicoretno.sharedpref";
 
@@ -52,11 +55,11 @@ public class ProfileFragment extends Fragment {
         tvEmail = view.findViewById(R.id.tvEmail);
         btnLogout = view.findViewById(R.id.btnLogout);
         ivAvatar.setClipToOutline(true);
-
-        userViewModel.getUserByEmail(email).observe(getViewLifecycleOwner(), user -> {
+        LiveDataUtil.observeOnce(userViewModel.getUserByEmail(email), user -> {
             tvNama.setText(user.fullName);
             tvEmail.setText(user.email);
             ivAvatar.setImageResource(R.drawable.avatar);
+            userProfile = user;
         });
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
@@ -64,6 +67,7 @@ public class ProfileFragment extends Fragment {
             public void onClick(View view) {
                 SessionManagerUtil.getInstance().endUserSession(getContext());
                 sharedPreferences.edit().clear().apply();
+                userViewModel.delete(userProfile);
                 Intent intent = new Intent(getContext(), LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);

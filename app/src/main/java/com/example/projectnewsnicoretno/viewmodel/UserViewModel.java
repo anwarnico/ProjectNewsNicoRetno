@@ -36,4 +36,8 @@ public class UserViewModel extends AndroidViewModel {
         userByEmail = userRepository.getUserByEmail(email);
         return userByEmail;
     }
+
+    public void delete(UserProfile userProfile) {
+        userRepository.delete(userProfile);
+    }
 }
