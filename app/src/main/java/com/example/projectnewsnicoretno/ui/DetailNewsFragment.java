@@ -79,6 +79,7 @@ public class DetailNewsFragment extends Fragment {
         tvPublishedAt = view.findViewById(R.id.tvPublishedAt);
         btnBookmark = view.findViewById(R.id.btnBookmark);
         ivNews = view.findViewById(R.id.ivNews);
+        ivNews.setClipToOutline(true);
 
         newsViewModel.getArticlesByTitle(title).observe(getViewLifecycleOwner(), articles -> {
             LocalDateTime localDateTime = LocalDateTime.parse(articles.publishedAt, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'"));

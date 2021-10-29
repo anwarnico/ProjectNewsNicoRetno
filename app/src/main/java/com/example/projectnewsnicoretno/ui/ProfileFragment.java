@@ -52,6 +52,7 @@ public class ProfileFragment extends Fragment {
         tvNama = view.findViewById(R.id.tvNama);
         tvEmail = view.findViewById(R.id.tvEmail);
         btnLogout = view.findViewById(R.id.btnLogout);
+        ivAvatar.setClipToOutline(true);
 
         userViewModel.getUserByEmail(email).observe(getViewLifecycleOwner(), user -> {
             tvNama.setText(user.fullName);
