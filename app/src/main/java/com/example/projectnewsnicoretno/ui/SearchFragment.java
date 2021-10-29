@@ -105,8 +105,6 @@ public class SearchFragment extends Fragment {
         sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
-                filter(s);
-                sharedPreferences.edit().putString("query", s).apply();
                 imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
                 return true;
             }

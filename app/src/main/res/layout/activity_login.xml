@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/layoutLogin"
-    android:background="@color/black"
+    android:background="@drawable/background_login"
     tools:context=".ui.LoginActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,7 +17,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:elevation="30dp">
 
         <TextView
             android:id="@+id/textView"

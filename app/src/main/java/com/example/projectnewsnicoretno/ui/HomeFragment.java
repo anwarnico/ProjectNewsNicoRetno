@@ -50,13 +50,9 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        String query = sharedPreferences.getString("query", "defaultQuery");
-        if (query != "defaultQuery") {
-            sharedPreferences.edit().remove("query").apply();
-        }
+        removePreferenceQuery();
         bottomNavigationView = getActivity().findViewById(R.id.bottomNavigationView);
         toolBar = getActivity().findViewById(R.id.toolBar);
-
         searchView = view.findViewById(R.id.searchView);
         searchView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,6 +76,13 @@ public class HomeFragment extends Fragment {
 
         SmartTabLayout viewPagerTab = (SmartTabLayout) view.findViewById(R.id.tab_layout);
         viewPagerTab.setViewPager(viewPager);
+    }
+
+    private void removePreferenceQuery() {
+        String query = sharedPreferences.getString("query", "defaultQuery");
+        if (query != "defaultQuery") {
+            sharedPreferences.edit().remove("query").apply();
+        }
     }
 
     @Override

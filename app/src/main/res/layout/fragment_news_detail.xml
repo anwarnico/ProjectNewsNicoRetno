@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@drawable/background_fragment"
     tools:context=".ui.HomeFragment">
 
     <ImageView
@@ -14,11 +14,11 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/custom_black_radius"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/news" />
+        tools:src="@drawable/news"
+        android:elevation="30dp"/>
 
     <TextView
         android:id="@+id/tvPublishedAt"
@@ -34,14 +34,15 @@
         android:background="@drawable/custom_white_radius"
         app:layout_constraintEnd_toStartOf="@+id/btnBookmark"
         app:layout_constraintStart_toStartOf="@+id/ivNews"
-        app:layout_constraintTop_toBottomOf="@+id/ivNews" />
+        app:layout_constraintTop_toBottomOf="@+id/ivNews"
+        android:elevation="30dp"/>
 
     <ImageButton
         android:id="@+id/btnBookmark"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:scaleType="fitCenter"
-        android:tint="@color/white"
+        android:tint="@color/black"
         android:background="@android:color/transparent"
         android:src="@drawable/bookmarks_icon"
         app:layout_constraintBottom_toBottomOf="@+id/tvPublishedAt"
@@ -63,7 +64,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/btnBookmark"
         app:layout_constraintStart_toStartOf="@+id/tvPublishedAt"
-        app:layout_constraintTop_toBottomOf="@+id/tvPublishedAt" />
-
+        app:layout_constraintTop_toBottomOf="@+id/tvPublishedAt"
+        android:elevation="30dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
